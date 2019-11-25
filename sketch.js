@@ -211,6 +211,7 @@ function find_selected_vertex(){
 function create_new_vertex(){
 	object.vertex.push([mouseX, mouseY]);
 	object.oldposition.push([mouseX, mouseY]);
+	return object.vertex.length - 1;
 }
 
 function create_new_edge(vertex1, vertex2){
@@ -221,6 +222,7 @@ function create_new_edge(vertex1, vertex2){
 			find_same_edge = true;
 		}
 	}
+	console.log(find_same_edge);
 	if (!find_same_edge){
 		object.edges.push([vertex1, vertex2]);
 		object.distances = [];
@@ -238,6 +240,7 @@ function mousePressed() {
 	    	let prev_select;
 	    	if (selected) {
 	    		prev_select = select;
+	    		console.log("prev_select = ", prev_select);
 	    	} else {
 	    		find_selected_vertex();
 	    		if (selected){
@@ -252,7 +255,7 @@ function mousePressed() {
 	    	selected = false;
 			find_selected_vertex()
 	    	if (!selected) {
-	    		create_new_vertex();
+	    		select = create_new_vertex();
 	    		create_new_edge(select, prev_select);
 	    		console.log("create_new_vertex and new_edge");
 	    		selected = false;
